@@ -55,7 +55,7 @@ def run(command: str) -> None:
 def is_colab():
     return 'google.colab' in sys.modules
 
-def colabconnect() -> None:
+def colabconnect(provider: str = "github") -> None:
     if is_colab():
         print("Mounting Google Drive...")
         drive = import_module("google.colab.drive")
@@ -80,5 +80,5 @@ def colabconnect() -> None:
     run("tar -xf vscode_cli.tar.gz")
 
     print("Starting the tunnel")
-    login_tunnel("microsoft")
+    login_tunnel(provider)
     start_tunnel()
