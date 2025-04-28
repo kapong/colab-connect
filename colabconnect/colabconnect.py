@@ -80,5 +80,6 @@ def colabconnect(provider: str = "github") -> None:
     run("tar -xf vscode_cli.tar.gz")
 
     print("Starting the tunnel")
-    login_tunnel(provider)
+    if provider != 'github':
+        login_tunnel(provider)
     start_tunnel()
