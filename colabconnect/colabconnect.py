@@ -36,7 +36,7 @@ def start_tunnel() -> None:
     return None
 
 def login_tunnel(provider: str) -> None:
-    command = f"code tunnel login --accept-server-license-terms --provider {provider}"
+    command = f"./code tunnel user login --provider {provider}"
     p = subprocess.Popen(
         command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
     )
