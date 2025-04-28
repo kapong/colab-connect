@@ -35,6 +35,17 @@ def start_tunnel() -> None:
             break
     return None
 
+def login_tunnel(provider: str) -> None:
+    command = f"code tunnel login --accept-server-license-terms --provider {provider}"
+    p = subprocess.Popen(
+        command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+    )
+    while True:
+        line = p.stdout.readline().decode("utf-8")
+        if line == "" and p.poll() is not None:
+            break
+        print(line.strip())
+    return None
 
 def run(command: str) -> None:
     process = subprocess.run(command.split())
@@ -69,4 +80,5 @@ def colabconnect() -> None:
     run("tar -xf vscode_cli.tar.gz")
 
     print("Starting the tunnel")
+    login_tunnel("microsoft")
     start_tunnel()
